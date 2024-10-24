@@ -34,7 +34,7 @@ public:
     }
 
     // Вставка нового элемента
-    void insert(const K& key, const V& value) {
+    void insert_list(const K& key, const V& value) {
         Node* current = head;
         while (current) {
             if (current->key == key) {
@@ -50,7 +50,7 @@ public:
     }
 
     // Получение значения по ключу
-    V get(const K& key) const {
+    V get_list(const K& key) const {
         Node* current = head;
         while (current) {
             if (current->key == key) {
@@ -62,7 +62,7 @@ public:
     }
 
     // Удаление элемента по ключу
-    void remove(const K& key) {
+    void remove_list(const K& key) {
         if (!head) return;
         if (head->key == key) {
             Node* temp = head;
@@ -138,7 +138,7 @@ private:
     }
 
 public:
-    HashTable(size_t table_size = 100) : capacity(table_size), size(0) {
+    HashTable(size_t table_size = 3) : capacity(table_size), size(0) {
         table = new LinkedList<K, V>[capacity];
     }
 
@@ -152,13 +152,13 @@ public:
         if (!table[index].contains(key)) {
             size++;
         }
-        table[index].insert(key, value);
+        table[index].insert_list(key, value);
     }
 
     // Получение значения по ключу
     V get(const K& key) const {
         size_t index = hash(key);
-        return table[index].get(key);
+        return table[index].get_list(key);
     }
 
     // Удаление элемента по ключу
@@ -167,7 +167,7 @@ public:
         if (table[index].contains(key)) {
             size--;
         }
-        table[index].remove(key);
+        table[index].remove_list(key);
     }
 
     // Печать всех элементов хеш-таблицы
@@ -204,6 +204,7 @@ public:
         if (file.is_open()) {
             for (size_t i = 0; i < capacity; ++i) {
                 table[i].save_to_file(file);  // вызываем метод save_to_file для каждого списка
+                file << "\n";
             }
             file.close();
         } else {

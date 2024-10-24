@@ -37,7 +37,7 @@ public:
         if (index > length || length >= capacity) {
             throw out_of_range("Index out of range or array is full");
         }
-        for (size_t i = length; i > index; --i) {
+        for (size_t i = length; i > index ; --i) {
             data[i] = data[i - 1];
         }
         data[index] = value;

@@ -116,7 +116,7 @@ private:
     }
 
     // Вспомогательная функция для проверки, является ли дерево полным
-    bool is_complete() const {
+    bool is_complete_queue() const {
         if (!root) return false;  // Пустое дерево считается полным
 
         Queue2<Node*> queue2;
@@ -278,8 +278,8 @@ public:
     }
 
     // Проверка, является ли дерево полным
-    bool is_complete2() const {
-        return is_complete();
+    bool is_complete_tree() const {
+        return is_complete_queue();
     }
 
     // Печать дерева (обход в ширину)

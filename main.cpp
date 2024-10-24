@@ -30,9 +30,9 @@ void execute_query(const string& query, Array<string>& array, SinglyLinkedList<s
         size_t index;
         iss >> index >> value;
         try {
-            array.insert_at(index - 1, value);
+            array.insert_at(index, value);
             array.save_to_file(filename);
-            cout << "Inserted " << value << " at index " << index - 1 << " in the array.\n";
+            cout << "Inserted " << value << " at index " << index << " in the array.\n";
         } catch (const out_of_range& e) {
             cerr << e.what() << "\n";
         }
@@ -294,7 +294,7 @@ void execute_query(const string& query, Array<string>& array, SinglyLinkedList<s
         cout << "Element " << value << (found ? " found" : " not found") << endl;
     } else if (command == "TCHECK") {
         tree.load_from_file(filename);
-        bool complete = tree.is_complete2();
+        bool complete = tree.is_complete_tree();
         cout << "Tree is " << (complete ? "complete." : "not complete or there is no tree.") << endl;
     } else if (command == "TPRINT") {
         tree.load_from_file(filename);
